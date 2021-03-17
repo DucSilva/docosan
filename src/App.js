@@ -1,24 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import { LayoutWrapperStyled } from './stylesheets/Layout';
+import Header from './components/Header';
+import CardDetail from './components/CardDetail';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getData } from './actions/index';
+import Spinner from './components/Spinner';
 
-function App() {
+const App = () => {
+  const dispatch = useDispatch();
+  const data = useSelector((state) => state?.dataList) || [];
+  const isFetching = useSelector((state) => state?.isFetching) || false;
+
+  React.useEffect(() => {
+    dispatch(getData())
+  }, []);
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <LayoutWrapperStyled>
+      <Header />
+      <Spinner isLoading={isFetching} />
+      {data?.map((item) => {
+        const { id } = item;
+        return <CardDetail key={id} {...item} />
+      })}
+
+    </LayoutWrapperStyled>
   );
 }
 

@@ -26,8 +26,38 @@ export const LiWrapperStyled = styled.li`
     list-style: none;
     padding: 5px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
     &:hover{
         background-color: #4AC0A4;
         color: white;
+    }
+
+    input[type="radio"] {
+        /* remove standard background appearance */
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        /* create custom radiobutton appearance */
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        /* background-color only for content */
+        background-clip: content-box;
+        border: 1px solid #333333;
+        border-radius: 50%;
+        padding: 3px;
+        margin-right: 10px;
+    }
+
+    /* appearance for checked radiobutton */
+    input[type="radio"]:checked {
+        background-color: #4AC0A4;
+    }
+
+    /* optional styles, I'm using this for centering radiobuttons */
+    .flex {
+        display: flex;
+        align-items: center;
     }
 `;

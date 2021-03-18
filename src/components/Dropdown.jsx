@@ -10,7 +10,7 @@ const Dropdown = ({ visible, data, onClick, value }) => {
         <DropdownWrapperStyled visible={visible}>
             {data.map(item => {
                 return <LiWrapperStyled key={item?.id || 0} value={item?.value || 0} onClick={() => onClickItem(item?.value)}>
-                    <input type="radio" />
+                    <input type="radio" checked={ item?.value === value} />
                     <span>{item?.name}</span>
                 </LiWrapperStyled>
             })}

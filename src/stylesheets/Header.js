@@ -32,7 +32,7 @@ export const SortItemStyled = styled.div`
         border: 1px solid #333333;
         cursor: pointer;
         ${(props) =>
-        props.isSort || props.isLanguage &&
+        (props.isSort || props.isLanguage) &&
         css`
               display: flex;
               justify-content: center;

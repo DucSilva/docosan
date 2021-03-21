@@ -1,4 +1,4 @@
-import { put, takeLatest, all } from "redux-saga/effects";
+import { put, takeLatest, all, delay } from "redux-saga/effects";
 import {
     GET_DATA_REQUEST,
     getDataSuccess,
@@ -20,6 +20,7 @@ import data from '../data.json';
 function* getData() {
     try {
         const _data = data?.sort(sortByDistance)
+        yield delay(1000); // because get data from json so it get very quickly => i just want to delay to check loading
         yield put(getDataSuccess(_data));
     } catch (error) {
         yield put(getDataError(error))
@@ -33,6 +34,7 @@ function* watchGetData() {
 function* sortByRatingDistance({ payload }) {
     if (payload === 0) {
         try {
+            yield delay(1000); // because get data from json so it get very quickly => i just want to delay to check loading
             const _data = data?.sort(sortByDistance)
             yield put(sortByDistanceRatingSuccess({ _data, payload }));
         } catch (error) {
@@ -40,6 +42,7 @@ function* sortByRatingDistance({ payload }) {
         }
     } else if (payload === 1) {
         try {
+            yield delay(1000); // because get data from json so it get very quickly => i just want to delay to check loading
             const _data = data?.sort(sortByRating)
             yield put(sortByDistanceRatingSuccess({ _data, payload }));
         } catch (error) {
@@ -56,6 +59,8 @@ function* sortByLanguage({ payload }) {
     switch (payload) {
         case 1: {
             try {
+                yield delay(1000); // because get data from json so it get very quickly => i just want to delay to check loading
+
                 const _data = data.filter((item) => filterItems(item, LANGUAGE_FILTER[1]));
 
                 yield put(sortByLanguageSuccess({ _data, payload }));
@@ -66,6 +71,7 @@ function* sortByLanguage({ payload }) {
         }
         case 2: {
             try {
+                yield delay(1000); // because get data from json so it get very quickly => i just want to delay to check loading
                 const _data = data.filter((item) => filterItems(item, LANGUAGE_FILTER[2]));
                 yield put(sortByLanguageSuccess({ _data, payload }));
             } catch (error) {
@@ -75,6 +81,8 @@ function* sortByLanguage({ payload }) {
         }
         case 3: {
             try {
+                yield delay(1000); // because get data from json so it get very quickly => i just want to delay to check loading
+
                 const _data = data.filter((item) => filterItems(item, LANGUAGE_FILTER[3]));
                 yield put(sortByLanguageSuccess({ _data, payload }));
             } catch (error) {
@@ -93,6 +101,8 @@ function* watchSortByLanguage() {
 
 function* clearSortLanguage() {
     try {
+        yield delay(1000); // because get data from json so it get very quickly => i just want to delay to check loading
+
         const _data = data?.sort(sortByDistance)
         yield put(clearLanguageSuccess(_data));
     } catch (error) {
